@@ -6,6 +6,30 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* Grey */
+  --grey-900: hsl(187, 24%, 22%);
+  --grey-500: hsl(186, 15%, 59%);
+
+  /* Green */
+  --green-600: hsl(169, 82%, 27%);
+  --green-200: hsl(148, 38%, 91%);
+
+  --white: hsl(0, 0%, 100%);
+
+  /* Error State */
+  --red: hsl(0, 66%, 54%);
+
+  /* Font Sizes */
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 2rem;
+
+  /* Font Weights */
+  --fw-regular: 400;
+  --fw-bold: 700;
+}
+
 body {
   min-height: 100vh;
   font-family: "Karla", sans-serif;

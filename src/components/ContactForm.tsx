@@ -41,6 +41,23 @@ function ContactForm() {
           </label>
         </div>
       </fieldset>
+
+      <div className="form__group">
+        <label htmlFor="message">
+          Message <span aria-hidden="true">*</span>
+        </label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <div className="form__group">
+        <input type="checkbox" id="consent" name="consent" required />
+        <label htmlFor="consent">
+          I consent to being contacted by the team{" "}
+          <span aria-hidden="true">*</span>
+        </label>
+      </div>
+
+      <button type="submit">Submit</button>
     </form>
   );
 }

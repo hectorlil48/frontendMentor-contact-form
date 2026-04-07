@@ -33,6 +33,9 @@
 body {
   min-height: 100vh;
   font-family: "Karla", sans-serif;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-regular);
+  background-color: var(--green-200);
 }
 
 input,

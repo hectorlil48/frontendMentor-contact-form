@@ -100,6 +100,11 @@ function ContactForm() {
             name="firstName"
             onChange={handleChange}
           />
+          {errors.firstName && (
+            <p className="form__error" role="alert">
+              {errors.firstName}
+            </p>
+          )}
         </div>
 
         <div className="form__group">
@@ -112,6 +117,11 @@ function ContactForm() {
             name="lastName"
             onChange={handleChange}
           />
+          {errors.lastName && (
+            <p className="form__error" role="alert">
+              {errors.lastName}
+            </p>
+          )}
         </div>
       </div>
 
@@ -119,7 +129,12 @@ function ContactForm() {
         <label htmlFor="email">
           Email Address <span aria-hidden="true">*</span>
         </label>
-        <input type="email" id="email" name="email" onChange={handleChange} />
+        <input type="text" id="email" name="email" onChange={handleChange} />
+        {errors.email && (
+          <p className="form__error" role="alert">
+            {errors.email}
+          </p>
+        )}
       </div>
 
       <fieldset>
@@ -146,6 +161,11 @@ function ContactForm() {
             Support Request
           </label>
         </div>
+        {errors.queryType && (
+          <p className="form__error" role="alert">
+            {errors.queryType}
+          </p>
+        )}
       </fieldset>
 
       <div className="form__group">
@@ -157,6 +177,11 @@ function ContactForm() {
           name="message"
           onChange={handleChange}
         ></textarea>
+        {errors.message && (
+          <p className="form__error" role="alert">
+            {errors.message}
+          </p>
+        )}
       </div>
 
       <div className="form__group">
@@ -170,6 +195,11 @@ function ContactForm() {
           I consent to being contacted by the team{" "}
           <span aria-hidden="true">*</span>
         </label>
+        {errors.consent && (
+          <p className="form__error" role="alert">
+            {errors.consent}
+          </p>
+        )}
       </div>
 
       <button type="submit">Submit</button>

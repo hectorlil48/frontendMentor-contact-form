@@ -9,14 +9,36 @@ type FormData = {
   consent: boolean;
 };
 
+type FormErrors = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  queryType: string;
+  message: string;
+  consent: string;
+};
+
+const isValidEmail = (email: string): boolean => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
 function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
     email: "",
-    message: "",
     queryType: "",
+    message: "",
     consent: false,
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    queryType: "",
+    message: "",
+    consent: "",
   });
 
   const handleChange: React.ChangeEventHandler<
@@ -33,6 +55,34 @@ function ContactForm() {
 
   const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
+    const newErrors: FormErrors = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      queryType: "",
+      message: "",
+      consent: "",
+    };
+
+    if (!formData.firstName) newErrors.firstName = "This field is required.";
+    if (!formData.lastName) newErrors.lastName = "This field is required.";
+    if (!formData.email) {
+      newErrors.email = "This field is required";
+    } else if (!isValidEmail(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    if (!formData.queryType)
+      newErrors.queryType = "Please select a query type.";
+    if (!formData.message) newErrors.message = "This field is required.";
+    if (!formData.consent)
+      newErrors.consent =
+        "To submit the form, you must consent to being contacted";
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some((error) => error !== "")) return;
+
     console.log(formData);
   };
   return (
@@ -48,7 +98,6 @@ function ContactForm() {
             type="text"
             id="firstName"
             name="firstName"
-            required
             onChange={handleChange}
           />
         </div>
@@ -61,7 +110,6 @@ function ContactForm() {
             type="text"
             id="lastName"
             name="lastName"
-            required
             onChange={handleChange}
           />
         </div>
@@ -71,13 +119,7 @@ function ContactForm() {
         <label htmlFor="email">
           Email Address <span aria-hidden="true">*</span>
         </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          onChange={handleChange}
-        />
+        <input type="email" id="email" name="email" onChange={handleChange} />
       </div>
 
       <fieldset>
@@ -90,7 +132,6 @@ function ContactForm() {
               type="radio"
               name="queryType"
               value="general"
-              required
               onChange={handleChange}
             />
             General Enquiry
@@ -114,7 +155,6 @@ function ContactForm() {
         <textarea
           id="message"
           name="message"
-          required
           onChange={handleChange}
         ></textarea>
       </div>
@@ -124,7 +164,6 @@ function ContactForm() {
           type="checkbox"
           id="consent"
           name="consent"
-          required
           onChange={handleChange}
         />
         <label htmlFor="consent">

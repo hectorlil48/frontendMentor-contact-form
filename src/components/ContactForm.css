@@ -1,0 +1,14 @@
+form {
+  background-color: var(--white);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 2rem;
+}

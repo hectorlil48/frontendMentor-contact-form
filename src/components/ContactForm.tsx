@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./ContactForm.css";
 
 type FormData = {
   firstName: string;

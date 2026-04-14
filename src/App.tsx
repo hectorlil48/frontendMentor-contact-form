@@ -2,9 +2,9 @@ import ContactForm from "./components/ContactForm";
 
 function App() {
   return (
-    <>
+    <main>
       <ContactForm />
-    </>
+    </main>
   );
 }
 

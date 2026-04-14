@@ -36,6 +36,10 @@ body {
   font-size: var(--fs-md);
   font-weight: var(--fw-regular);
   background-color: var(--green-200);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 input,

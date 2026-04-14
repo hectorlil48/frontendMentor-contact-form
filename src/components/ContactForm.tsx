@@ -87,8 +87,8 @@ function ContactForm() {
     console.log(formData);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Contact Us</h1>
+    <form className="contact-form" onSubmit={handleSubmit}>
+      <h1 className="contact-form__title">Contact Us</h1>
 
       <div className="form__row">
         <div className="form__group">
@@ -185,7 +185,7 @@ function ContactForm() {
         )}
       </div>
 
-      <div className="form__group">
+      <div className="form__consent">
         <input
           type="checkbox"
           id="consent"

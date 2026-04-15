@@ -5,7 +5,7 @@ type FormData = {
   firstName: string;
   lastName: string;
   email: string;
-  queryType: string;
+  queryType: string[];
   message: string;
   consent: boolean;
 };
@@ -28,7 +28,7 @@ function ContactForm() {
     firstName: "",
     lastName: "",
     email: "",
-    queryType: "",
+    queryType: [],
     message: "",
     consent: false,
   });
@@ -48,6 +48,17 @@ function ContactForm() {
     const { name, value, type } = e.target;
     const checked =
       type === "checkbox" ? (e.target as HTMLInputElement).checked : false;
+
+    if (name === "queryType") {
+      setFormData((prevData) => ({
+        ...prevData,
+        queryType: checked
+          ? [...prevData.queryType, value]
+          : prevData.queryType.filter((v) => v !== value),
+      }));
+      return;
+    }
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
@@ -73,7 +84,7 @@ function ContactForm() {
     } else if (!isValidEmail(formData.email)) {
       newErrors.email = "Please enter a valid email address";
     }
-    if (!formData.queryType)
+    if (formData.queryType.length === 0)
       newErrors.queryType = "Please select a query type.";
     if (!formData.message) newErrors.message = "This field is required.";
     if (!formData.consent)
@@ -148,10 +159,10 @@ function ContactForm() {
         <legend className="form__legend">
           Query Type <span aria-hidden="true">*</span>
         </legend>
-        <div className="form__radio-group">
+        <div className="form__query-group">
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="queryType"
               value="general"
               onChange={handleChange}
@@ -160,7 +171,7 @@ function ContactForm() {
           </label>
           <label>
             <input
-              type="radio"
+              type="checkbox"
               name="queryType"
               value="support"
               onChange={handleChange}

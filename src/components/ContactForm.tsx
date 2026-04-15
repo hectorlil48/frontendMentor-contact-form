@@ -209,7 +209,9 @@ function ContactForm() {
         )}
       </div>
 
-      <button type="submit">Submit</button>
+      <button className="form__submit" type="submit">
+        Submit
+      </button>
     </form>
   );
 }

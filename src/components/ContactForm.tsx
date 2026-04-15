@@ -138,8 +138,8 @@ function ContactForm() {
         )}
       </div>
 
-      <fieldset>
-        <legend>
+      <fieldset className="form__fieldset">
+        <legend className="form__legend">
           Query Type <span aria-hidden="true">*</span>
         </legend>
         <div className="form__radio-group">
@@ -169,7 +169,7 @@ function ContactForm() {
         )}
       </fieldset>
 
-      <div className="form__group">
+      <div className="form__group form__group--message">
         <label htmlFor="message">
           Message <span aria-hidden="true">*</span>
         </label>

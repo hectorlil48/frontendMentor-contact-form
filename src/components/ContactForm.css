@@ -27,7 +27,12 @@
   font-weight: var(--fw-regular);
 }
 
-.form__group label span {
+.form__group--message {
+  margin-bottom: 2.5rem;
+}
+
+.form__group label span,
+.form__legend span {
   color: var(--green-600);
   margin-left: 0.5rem;
 }
@@ -41,4 +46,37 @@
 
 .form__group textarea {
   min-height: 15rem;
+}
+
+.form__fieldset {
+  border: none;
+  margin-bottom: 1.5rem;
+}
+
+.form__radio-group {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form__radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--grey-500);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+}
+
+.form__radio-group input[type="radio"] {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1.5px solid var(--grey-500);
+  border-radius: 50%;
+  opacity: 50%;
 }

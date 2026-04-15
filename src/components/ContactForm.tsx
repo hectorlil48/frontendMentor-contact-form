@@ -130,7 +130,13 @@ function ContactForm() {
         <label htmlFor="email">
           Email Address <span aria-hidden="true">*</span>
         </label>
-        <input type="text" id="email" name="email" onChange={handleChange} />
+        <input
+          type="text"
+          id="email"
+          name="email"
+          autoComplete="email"
+          onChange={handleChange}
+        />
         {errors.email && (
           <p className="form__error" role="alert">
             {errors.email}

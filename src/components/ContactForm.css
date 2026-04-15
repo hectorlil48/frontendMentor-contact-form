@@ -49,7 +49,6 @@
 }
 
 .form__fieldset {
-  border: none;
   margin-bottom: 1.5rem;
 }
 
@@ -76,7 +75,27 @@
   appearance: none;
   width: 1.25rem;
   height: 1.25rem;
-  border: 1.5px solid var(--grey-500);
+  border: 2px solid var(--grey-500);
   border-radius: 50%;
   opacity: 50%;
+}
+
+.form__consent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+.form__consent input[type="checkbox"] {
+  appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  border: 2px solid var(--grey-500);
+}
+
+.form__consent label span {
+  color: var(--grey-500);
 }

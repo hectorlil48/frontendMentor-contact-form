@@ -102,7 +102,9 @@ function ContactForm() {
       <h1 className="contact-form__title">Contact Us</h1>
 
       <div className="form__row">
-        <div className="form__group">
+        <div
+          className={`form__group ${errors.firstName ? "form__group--error" : ""}`}
+        >
           <label htmlFor="firstName">
             First Name <span aria-hidden="true">*</span>
           </label>
@@ -119,7 +121,9 @@ function ContactForm() {
           )}
         </div>
 
-        <div className="form__group">
+        <div
+          className={`form__group ${errors.lastName ? "form__group--error" : ""}`}
+        >
           <label htmlFor="lastName">
             Last Name <span aria-hidden="true">*</span>
           </label>
@@ -137,7 +141,9 @@ function ContactForm() {
         </div>
       </div>
 
-      <div className="form__group">
+      <div
+        className={`form__group ${errors.email ? "form__group--error" : ""}`}
+      >
         <label htmlFor="email">
           Email Address <span aria-hidden="true">*</span>
         </label>
@@ -180,13 +186,15 @@ function ContactForm() {
           </label>
         </div>
         {errors.queryType && (
-          <p className="form__error" role="alert">
+          <p className="form__error form__error--queryType" role="alert">
             {errors.queryType}
           </p>
         )}
       </fieldset>
 
-      <div className="form__group form__group--message">
+      <div
+        className={`form__group form__group--message ${errors.message ? "form__group--error" : ""}`}
+      >
         <label htmlFor="message">
           Message <span aria-hidden="true">*</span>
         </label>
@@ -203,18 +211,20 @@ function ContactForm() {
       </div>
 
       <div className="form__consent">
-        <input
-          type="checkbox"
-          id="consent"
-          name="consent"
-          onChange={handleChange}
-        />
-        <label htmlFor="consent">
-          I consent to being contacted by the team{" "}
-          <span aria-hidden="true">*</span>
-        </label>
+        <div className="form__consent-row">
+          <input
+            type="checkbox"
+            id="consent"
+            name="consent"
+            onChange={handleChange}
+          />
+          <label htmlFor="consent">
+            I consent to being contacted by the team{" "}
+            <span aria-hidden="true">*</span>
+          </label>
+        </div>
         {errors.consent && (
-          <p className="form__error" role="alert">
+          <p className="form__error error-consent" role="alert">
             {errors.consent}
           </p>
         )}

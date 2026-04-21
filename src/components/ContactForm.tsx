@@ -224,7 +224,7 @@ function ContactForm() {
           </label>
         </div>
         {errors.consent && (
-          <p className="form__error form__error--consent" role="alert">
+          <p className="form__error" role="alert">
             {errors.consent}
           </p>
         )}

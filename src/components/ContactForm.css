@@ -1,4 +1,5 @@
 .contact-form {
+  max-width: 46rem;
   background-color: var(--white);
   padding: 1.5rem;
   border-radius: 1rem;
@@ -25,6 +26,7 @@
   margin-bottom: 1.5rem;
   font-size: var(--fs-md);
   font-weight: var(--fw-regular);
+  line-height: 1.5;
 }
 
 .form__group--message {
@@ -41,7 +43,7 @@
 .form__group textarea {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
-  border: 1px solid var(--grey-500);
+  border: 1.5px solid var(--grey-500);
   outline: none;
 }
 
@@ -53,15 +55,19 @@
 }
 
 .form__group textarea {
-  min-height: 15rem;
+  height: 15rem;
 }
 
 .form__fieldset {
   margin-bottom: 1.5rem;
 }
 
+.form__legend {
+  line-height: 1.5;
+}
+
 .form__query-group {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -71,11 +77,11 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border: 1px solid var(--grey-500);
+  border: 1.5px solid var(--grey-500);
   border-radius: 0.5rem;
   padding: 0.75rem 1.5rem;
   cursor: pointer;
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   line-height: 1.5;
 }
 
@@ -177,13 +183,36 @@
   margin-top: 1rem;
 }
 
-.error-consent {
-  max-width: 347px;
-}
-
 @media (min-width: 48rem) {
   .contact-form {
     padding: 2.5rem;
     box-shadow: none;
+  }
+
+  .form__row {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .form__row .form__group {
+    flex: 1;
+  }
+
+  .form__query-group {
+    flex-direction: row;
+  }
+
+  .form__query-group label {
+    flex: 1;
+  }
+
+  .form__group textarea {
+    height: 132px;
+  }
+}
+
+@media (min-width: 64rem) {
+  .form__group textarea {
+    height: 105px;
   }
 }

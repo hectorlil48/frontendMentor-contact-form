@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ContactForm.css";
+import iconSuccessCheck from "../assets/images/icon-success-check.svg";
 
 type FormData = {
   firstName: string;
@@ -32,6 +33,14 @@ function ContactForm() {
     message: "",
     consent: false,
   });
+
+  const [showToast, setShowToast] = useState(false);
+
+  useEffect(() => {
+    if (!showToast) return;
+    const timer = setTimeout(() => setShowToast(false), 5000);
+    return () => clearTimeout(timer);
+  }, [showToast]);
 
   const [errors, setErrors] = useState<FormErrors>({
     firstName: "",
@@ -95,145 +104,166 @@ function ContactForm() {
 
     if (Object.values(newErrors).some((error) => error !== "")) return;
 
-    console.log(formData);
+    setShowToast(true);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      queryType: [],
+      message: "",
+      consent: false,
+    });
   };
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <h1 className="contact-form__title">Contact Us</h1>
+    <>
+      {showToast && (
+        <div className="toast" role="alert">
+          <div className="toast__header">
+            <img src={iconSuccessCheck} alt="" aria-hidden="true" />
+            <h2 className="toast__title">Message Sent!</h2>
+          </div>
+          <p className="toast__body">
+            Thanks for completing the form. We'll be in touch soon!
+          </p>
+        </div>
+      )}
+      <form key={showToast ? "submitted" : "active"} className="contact-form" onSubmit={handleSubmit}>
+        <h1 className="contact-form__title">Contact Us</h1>
 
-      <div className="form__row">
+        <div className="form__row">
+          <div
+            className={`form__group ${errors.firstName ? "form__group--error" : ""}`}
+          >
+            <label htmlFor="firstName">
+              First Name <span aria-hidden="true">*</span>
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              onChange={handleChange}
+            />
+            {errors.firstName && (
+              <p className="form__error" role="alert">
+                {errors.firstName}
+              </p>
+            )}
+          </div>
+
+          <div
+            className={`form__group ${errors.lastName ? "form__group--error" : ""}`}
+          >
+            <label htmlFor="lastName">
+              Last Name <span aria-hidden="true">*</span>
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              onChange={handleChange}
+            />
+            {errors.lastName && (
+              <p className="form__error" role="alert">
+                {errors.lastName}
+              </p>
+            )}
+          </div>
+        </div>
+
         <div
-          className={`form__group ${errors.firstName ? "form__group--error" : ""}`}
+          className={`form__group ${errors.email ? "form__group--error" : ""}`}
         >
-          <label htmlFor="firstName">
-            First Name <span aria-hidden="true">*</span>
+          <label htmlFor="email">
+            Email Address <span aria-hidden="true">*</span>
           </label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
+            id="email"
+            name="email"
+            autoComplete="email"
             onChange={handleChange}
           />
-          {errors.firstName && (
+          {errors.email && (
             <p className="form__error" role="alert">
-              {errors.firstName}
+              {errors.email}
             </p>
           )}
         </div>
 
+        <fieldset className="form__fieldset">
+          <legend className="form__legend">
+            Query Type <span aria-hidden="true">*</span>
+          </legend>
+          <div className="form__query-group">
+            <label>
+              <input
+                type="checkbox"
+                name="queryType"
+                value="general"
+                onChange={handleChange}
+              />
+              General Enquiry
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="queryType"
+                value="support"
+                onChange={handleChange}
+              />
+              Support Request
+            </label>
+          </div>
+          {errors.queryType && (
+            <p className="form__error form__error--queryType" role="alert">
+              {errors.queryType}
+            </p>
+          )}
+        </fieldset>
+
         <div
-          className={`form__group ${errors.lastName ? "form__group--error" : ""}`}
+          className={`form__group form__group--message ${errors.message ? "form__group--error" : ""}`}
         >
-          <label htmlFor="lastName">
-            Last Name <span aria-hidden="true">*</span>
+          <label htmlFor="message">
+            Message <span aria-hidden="true">*</span>
           </label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
+          <textarea
+            id="message"
+            name="message"
             onChange={handleChange}
-          />
-          {errors.lastName && (
+          ></textarea>
+          {errors.message && (
             <p className="form__error" role="alert">
-              {errors.lastName}
+              {errors.message}
             </p>
           )}
         </div>
-      </div>
 
-      <div
-        className={`form__group ${errors.email ? "form__group--error" : ""}`}
-      >
-        <label htmlFor="email">
-          Email Address <span aria-hidden="true">*</span>
-        </label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          autoComplete="email"
-          onChange={handleChange}
-        />
-        {errors.email && (
-          <p className="form__error" role="alert">
-            {errors.email}
-          </p>
-        )}
-      </div>
-
-      <fieldset className="form__fieldset">
-        <legend className="form__legend">
-          Query Type <span aria-hidden="true">*</span>
-        </legend>
-        <div className="form__query-group">
-          <label>
+        <div className="form__consent">
+          <div className="form__consent-row">
             <input
               type="checkbox"
-              name="queryType"
-              value="general"
+              id="consent"
+              name="consent"
               onChange={handleChange}
             />
-            General Enquiry
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="queryType"
-              value="support"
-              onChange={handleChange}
-            />
-            Support Request
-          </label>
+            <label htmlFor="consent">
+              I consent to being contacted by the team{" "}
+              <span aria-hidden="true">*</span>
+            </label>
+          </div>
+          {errors.consent && (
+            <p className="form__error" role="alert">
+              {errors.consent}
+            </p>
+          )}
         </div>
-        {errors.queryType && (
-          <p className="form__error form__error--queryType" role="alert">
-            {errors.queryType}
-          </p>
-        )}
-      </fieldset>
 
-      <div
-        className={`form__group form__group--message ${errors.message ? "form__group--error" : ""}`}
-      >
-        <label htmlFor="message">
-          Message <span aria-hidden="true">*</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          onChange={handleChange}
-        ></textarea>
-        {errors.message && (
-          <p className="form__error" role="alert">
-            {errors.message}
-          </p>
-        )}
-      </div>
-
-      <div className="form__consent">
-        <div className="form__consent-row">
-          <input
-            type="checkbox"
-            id="consent"
-            name="consent"
-            onChange={handleChange}
-          />
-          <label htmlFor="consent">
-            I consent to being contacted by the team{" "}
-            <span aria-hidden="true">*</span>
-          </label>
-        </div>
-        {errors.consent && (
-          <p className="form__error" role="alert">
-            {errors.consent}
-          </p>
-        )}
-      </div>
-
-      <button className="form__submit" type="submit">
-        Submit
-      </button>
-    </form>
+        <button className="form__submit" type="submit">
+          Submit
+        </button>
+      </form>
+    </>
   );
 }
 

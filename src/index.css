@@ -62,7 +62,7 @@ fieldset {
 }
 
 textarea {
-  resize: none;
+  resize: vertical;
 }
 
 @media (min-width: 48rem) {
